@@ -1,0 +1,226 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>趣绮梦 - 趣标记 - Data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" charset="utf-8">
+    <link href="static/css/bootstrap.min-3.7.css" rel="stylesheet">
+
+    <!--图标样式-->
+    <link rel="stylesheet" href="static/css/normalize.min.css">
+    <!--主要样式-->
+    <link rel="stylesheet" href="static/css/checkbox.style.css">
+
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+
+    <script>
+
+    $(function () {
+        var viewport = document.querySelector('meta[name=viewport]');
+        var winHigh = $(window).height();
+        winHigh = winHigh/1;
+        $(".container").css("height",winHigh+"px");
+    });
+
+
+    function updateinfo() {
+        var REG = document.getElementById('chck1').checked.toString();
+        var TEL = document.getElementById('chck2').checked.toString();
+        var WECHAT = document.getElementById('chck3').checked.toString();
+        var ZFBNAME = document.getElementById('chck7').checked.toString();
+        var SMRZ = document.getElementById('chck4').checked.toString();
+        var NoCheckZFX = document.getElementById('chck5').checked.toString();
+        var NoCheckBL = document.getElementById('chck6').checked.toString();
+
+        var LimitNL = $("#LimitNL").val();
+        var LimitHY = $("#LimitHY").val();
+        var LimitSCHY = $("#LimitSCHY").val();
+        var LimitDBS = $("#LimitDBS").val();
+        var LimitGroupNum = $("#LimitGroupNum").val();
+        
+
+        var data = {
+            REG: REG,
+            TEL: TEL,
+            WECHAT: WECHAT,
+            ZFBNAME: ZFBNAME,
+            SMRZ: SMRZ,
+            NoCheckZFX: NoCheckZFX,
+            NoCheckBL: NoCheckBL,
+            LimitNL: LimitNL,
+            LimitHY: LimitHY,
+            LimitSCHY: LimitSCHY,
+            LimitDBS: LimitDBS,
+            LimitGroupNum: LimitGroupNum
+        };
+
+        $.ajax({
+            url: "./DataSetCore.php",
+            type: "POST",
+            data: data, // 将数据转换为 URL 参数格式
+            success: function(response) {
+                // 请求成功后的处理
+                if(response.indexOf("ALERT[") != -1){
+                    var al = substrstr(response,"ALERT[","]ALERT");
+                    alert(al);
+                }else{
+                    alert("更新完成!");
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // 请求失败后执行的函数
+                alert("请求失败!");
+            }
+        });
+    }
+
+    //取出中间文本
+    function substrstr(str,f,n){
+        return str.substring(str.indexOf(f) + f.length, str.indexOf(n));
+    }
+    </script>
+    
+    <style>
+        .container {
+            display: table;
+            height: 100%;
+        }
+        .row {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .row-centered {
+            text-align: center;
+        }
+        .col-centered {
+            display: inline-block;
+            float: none;
+            text-align: left;
+            margin-right: -4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row row-centered">
+            <div class="well col-md-6 col-centered">
+                <a href="index.html">←返回主页</a>
+                <center><font size="6px">首选项</font></center>
+                    <br>
+                    <center>
+                    <div class="input-group input-group-md">
+                        <div style="display:flex;">
+                            <font size="3px">必须账号注册&nbsp;</font>
+                            <input id="chck1" type="checkbox" checked="">                            <label for="chck1" class="check-trail">
+                                <span class="check-handler"></span>
+                            </label>
+                            &nbsp;&nbsp;
+                            <font size="3px">必须绑定手机&nbsp;</font>
+                            <input id="chck2" type="checkbox" checked="">                            <label for="chck2" class="check-trail">
+                                <span class="check-handler"></span>
+                            </label>
+                        </div>
+                    </div>
+                    </center>
+                    <center>
+                    <div class="input-group input-group-md">
+                        <div style="display:flex;">
+                            <font size="3px">必须绑定微信&nbsp;</font>
+                            <input id="chck3" type="checkbox">                            <label for="chck3" class="check-trail">
+                                <span class="check-handler"></span>
+                            </label>
+
+                            &nbsp;&nbsp;
+
+                            <font size="3px">必须实名认证&nbsp;</font>
+                            <input id="chck4" type="checkbox">                            <label for="chck4" class="check-trail">
+                                <span class="check-handler"></span>
+                            </label>
+                        </div>
+                    </div>
+                    </center>
+                    <center>
+                    <div class="input-group input-group-md">
+                        <div style="display:flex;">
+                            <font size="3px">忽略中风险号&nbsp;</font>
+                            <input id="chck5" type="checkbox">                            <label for="chck5" class="check-trail2">
+                                <span class="check-handler"></span>
+                            </label>
+
+                            &nbsp;&nbsp;
+
+                            <font size="3px">忽略避雷账号&nbsp;</font>
+                            <input id="chck6" type="checkbox">                            <label for="chck6" class="check-trail2">
+                                <span class="check-handler"></span>
+                            </label>
+                        </div>
+                    </div>
+                    </center>
+                    <center>
+                    <div class="input-group input-group-md">
+                        <div style="display:flex;">
+                            <font size="3px">必须绑支付宝&nbsp;</font>
+                            <input id="chck7" type="checkbox">                            <label for="chck7" class="check-trail">
+                                <span class="check-handler"></span>
+                            </label>
+
+                            &nbsp;&nbsp;
+
+                            <font size="3px">未指定(占位)&nbsp;</font>
+                            <input id="chck8" type="checkbox">                            <label for="chck8" class="check-trail">
+                                <span class="check-handler"></span>
+                            </label>
+                        </div>
+                    </div>
+                    </center>
+
+                    <br>
+                    <div class="input-group input-group-md">
+                        <span class="input-group-addon" id="sizing-addon1">最低实名年龄</span>
+                        <input type="text" class="form-control" id="LimitNL" name="LimitNL" placeholder="建议18或以上" value="16" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                    </div>
+                    * 建议18或以上 年龄大于35也会有提醒.
+                    <br>
+                    <br>
+                    <div class="input-group input-group-md">
+                        <span class="input-group-addon" id="sizing-addon1">最低累计活跃度</span>
+                        <input type="text" class="form-control" id="LimitHY" name="LimitHY" placeholder="建议100或以上" value="100" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                    </div>
+                    * 建议100或以上 (Tips:就是要求累计活跃度)
+                    <br>
+                    <br>
+                    <div class="input-group input-group-md">
+                        <span class="input-group-addon" id="sizing-addon1">首次活跃距今</span>
+                        <input type="text" class="form-control" id="LimitSCHY" name="LimitSCHY" placeholder="建议30或以上" value="30" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                        <span class="input-group-addon" id="sizing-addon1">天</span>
+                    </div>
+                    * 建议30或以上 首次梦梦记录活跃距今
+                    <br>
+                    <br>
+                    <div class="input-group input-group-md">
+                        <span class="input-group-addon" id="sizing-addon1">最低历史打标数</span>
+                        <input type="text" class="form-control" id="LimitDBS" name="LimitDBS" placeholder="0或任意数" value="2" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                        <span class="input-group-addon" id="sizing-addon1">个</span>
+                    </div>
+                    * 0或任意数 (Tips:买过多少打标模板)
+                    <br>
+                    <br>
+                    <div class="input-group input-group-md">
+                        <span class="input-group-addon" id="sizing-addon1">最少加群数</span>
+                        <input type="text" class="form-control" id="LimitGroupNum" name="LimitGroupNum" placeholder="0或任意数" value="1" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
+                        <span class="input-group-addon" id="sizing-addon1">个</span>
+                    </div>
+                    * 0或任意数 (Tips:加了多少有梦梦的群)
+                    <br>
+                    <br>
+                    * 请务必仔细确认嗷呜~ 更改后记得点提交~
+                    <button type="submit" class="btn btn-success btn-block" onclick="updateinfo();">更新</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

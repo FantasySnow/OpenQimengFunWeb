@@ -1,0 +1,77 @@
+
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>趣绮梦 - 趣标记</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<!--响应式框架-->
+<link rel='stylesheet' href='static/css/bootstrap.min.css'>
+
+
+<!--主要样式-->
+<link rel="stylesheet" href="static/css/style.css">
+
+<style>
+/*賊拉好看(?)*/
+.BiaoTi {
+font-size:14px;
+background-clip: border-box;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+color: #FF512F;
+font-weight: 700;
+text-shadow: 0px 0px 7px #ffd800;
+background-image: linear-gradient(90deg, #ffd800 0%, #ff512f 100%, #fff);
+animation: glow-animation 10s infinite linear;
+color: #FFC0CB;
+box-sizing: border-box;
+vertical-align: inherit;
+}
+
+@keyframes glow-animation {
+0% {
+filter: hue-rotate(-360deg)
+}
+
+100% {
+filter: hue-rotate(360deg)
+}
+}
+</style>
+
+</head>
+<body>
+  
+<div class="container">
+
+  <div class="card-wrap">
+  
+    <div class="card border-0 shadow card--register is-show" id="welcome">
+      <div class="card-body">
+        <form class="form-horizontal">
+        <h2 class="card-title">模板管理系统</h2>
+          <div class="form-group">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+            <input class="form-control" type="text" name="uq" id="uq" value="" placeholder="购买商用的账号" required="required">
+          </div>
+          <font color="red">禁止违规操作</font>
+          <div class="form-group">
+          <input id="EnterSystem" name="EnterSystem" type="submit" class="btn btn-lg" value="进入管理系统">
+          </div>
+        <a href="https://qimeng.fun/Web/" target="_Blank">官网</a> · <a href="index.html">返回上一页</a>
+        <br>
+        <a rel="nofollow" href="https://beian.miit.gov.cn/" target="_blank">冀ICP备19033319号-1</a>
+      </form>
+        </div>
+      </div>
+    </div>
+  
+</div>
+  
+<script src="static/js/index.js"></script>
+</body>
+</html>

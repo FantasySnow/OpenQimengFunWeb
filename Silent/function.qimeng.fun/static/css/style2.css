@@ -1,0 +1,14 @@
+a.auth-btn-directzd {
+    flex: 1;
+    border: 1px solid #6699FF;
+    text-align: center;
+    height: 30px;
+    border-radius: 5px;
+    line-height: 30px;
+    font-weight: 500;
+    margin-left: 5px;
+}
+
+a.auth-btn-directzd:hover {
+    box-shadow: -2px 3px 0px 0px #6699FF;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>FAQ问题与解答</title>
+<meta name="description" content="Neat">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" user-scalable="no">
+
+<link rel="stylesheet" href="static/css/style-1.css">
+
+<script src="static/js/jquery.min1.js"></script>
+
+</head>
+<body>
+
+<header class="header">
+	<a href="ajax-1.html"><img src="static/picture/home.png" alt=""></a>
+	<div class="title">FAQ问题与解答</div>
+	<div class="progress-bar"></div>
+</header>
+<div class="main-group">
+	<font color="#004AFF"><p>更新时间 2023年1月17日 10点50分</p></font>
+	<h3>FAQ问题与解答:&nbsp;</h3>
+	<font color="#FF4A4A"><h4>规定禁止:&nbsp;</h4></font>
+	<p>1.我可以帮助别人打标吗?<br>◈◈◈ 答： 禁止,除非幻梦特定授权.</p>
+	<p>2.共断或主断可以给另一方出的那份打标吗?<br>◈◈◈ 答： 包月账号禁止,计次账号允许.</p>
+	<p>3.不是我的买断我可以打标吗?<br>◈◈◈ 答： 严令禁止!</p>
+	<p>4.我的账号可以借给别人帮我打吗?<br>◈◈◈ 答： 禁止未经允许将账号擅自借与他人.</p>
+	<p>&nbsp;</p>
+	<font color="#CC66FF"><h4>问题:&nbsp;</h4></font>
+	<p>1.显式和隐式有什么区别?<br>◈◈◈ 答： 显式是可以看出来模板被打了标记,隐式几乎和原文件一样.</p>
+	<p>2.一个模板我可以给<font color="red">两部分人</font>分别打隐式和显式吗?<br>◈◈◈ 答： 可以,但是不能一个人打多次(可以补打文件).</p>
+	<p>3.标记会不会太简单?<br>◈◈◈ 答: 这东西不好说,梦梦不看txt快瞎了也就找到了两个(26图层22个被打标)xwx...</p>
+	<p>4.为什么收费?<br>◈◈◈ 答: 这程序算是幻梦耗巨资和精力做出来的了...毕竟要维护qwq...</p>
+	<p>5.为什么打出来的psd文件提示版本异常?<br>◈◈◈ 答: iPad的Procreat导出的psd要用SAI或PS编辑保存一下,PS提示版本异常的话请用SAI编辑保存一下.</p>
+	<p>6.为什么有的人有显式打标和隐式打标而我只有显式?<br>◈◈◈ 答: 是因为权限组的关系嗷呜,后期会随机给老师开更高级的权限呢~</p>
+	<p>7.加密的txt怎么看?<br>◈◈◈ 答: 加密的txt是幻梦帮查专用的文件.</p>
+	<p>8.为什么我的zip里面都是乱码?<br>◈◈◈ 答: 请打开zip文件,设置编码为GBK.</p>
+	<p>9.如果我打错了QQ怎么办?<br>◈◈◈ 答: 请去 SYS -> 商用管理 里输入之前输错的Q并且删除即可.</p>
+	<p>10.如果商用不能用云存储怎么办?<br>◈◈◈ 答: 请去 SYS -> 商用管理 里输入商用QQ即可提取文件,请注意!此操作会引起部分追溯功能无法正常运作!</p>
+	<p>11.如果文件阴影层QQ很明显怎么办?<br>◈◈◈ 答: 请把图层的文件夹调整成 穿透 ,把图层调整成 正片叠底.</p>
+	<p>12.关于补打标模板(买商的人文件丢了)怎么办?<br>◈◈◈ 答: 补打文件(每个)最高收取费用不得高于原商价格的<font color="red">10%</font>(最高不能高于<font color="red">15R</font>),<font color="red"><u>没有最低要求</u></font>,趣绮梦不收取任何费用!</p>
+	<p>8.为什么SAI提示不支持的颜色模式?<br>◈◈◈ 答: 请使用PS检查文件颜色模式是否为CMYK,SAI和其他许多画图软件不支持CMYK,建议转换成RGB后打标.</p>
+	<p>8.为什么SAI打开之后文件是空白的或者只有一个水印或二维码图层?<br>◈◈◈ 答: 请确定SAI版本是否为2020年之后的版本,在SAI标题就能看到.</p>
+	<p>&nbsp;</p>
+</div>
+
+<script type="text/javascript">
+// 取消scroll事件的监听函数
+$(window).off('scroll');
+(function() {
+	let progress_bar = $('.progress-bar');
+	let win_h = $(window).height();
+	let body_h = $('body').height();
+	let sHeight = body_h - win_h;
+
+	function updateProgress(p) {
+		progress_bar.css('width', p * 100 + '%');
+	}
+	$(window).on('scroll', function() {
+		window.requestAnimationFrame(function(){
+			let perc = Math.max(0, Math.min(1, $(window).scrollTop() / sHeight));
+			updateProgress(perc);
+		});
+	});
+}());
+</script>
+</body>
+</html>

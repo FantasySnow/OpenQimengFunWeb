@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>趣绮梦 - 趣标记</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<!--响应式框架-->
+<link rel='stylesheet' href='static/css/bootstrap.min.css'>
+
+
+<!--主要样式-->
+<link rel="stylesheet" href="static/css/Color.css">
+<link rel="stylesheet" href="static/css/style.css">
+<style>
+/*賊拉好看(?)*/
+.BiaoTi {
+font-size:14px;
+background-clip: border-box;
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+color: #FF512F;
+font-weight: 700;
+text-shadow: 0px 0px 7px #ffd800;
+background-image: linear-gradient(90deg, #ffd800 0%, #ff512f 100%, #fff);
+animation: glow-animation 10s infinite linear;
+color: #FFC0CB;
+box-sizing: border-box;
+vertical-align: inherit;
+}
+
+@keyframes glow-animation {
+0% {
+filter: hue-rotate(-360deg)
+}
+
+100% {
+filter: hue-rotate(360deg)
+}
+}
+</style>
+
+</head>
+<body>
+  
+<div class="container">
+
+	<div class="card-wrap">
+	
+		<div class="card border-0 shadow card--welcome is-show" id="welcome">
+			<div class="card-body">
+				<h2 class="card-title">趣绮梦 - 趣标记</h2>
+				<div class="btn-wrap">
+				<font color="#FF9933"><b>使用权剩余次数<br>NaN次&nbsp;</b><a class="ZQDL2" href="ExChange.html">[充值]</a></font><br>				<a class="btn btn-lg btn-register js-btn" data-target="register" id="ptp">PSD -> 显式打标</a>
+				<a class="btn btn-lg btn-login js-btn" data-target="login" id="ptm">PSD -> 隐式打标</a>
+        <a class="btn btn-lg btn-um js-btn" id="um" href="Manage.html">SYS -> 商用管理</a>
+								<a hidden="true" id="tsa1">请长按下方链接进行复制</a>
+				<a hidden="true" id="tsa2">https://qimeng.fun/?t=DBJ</a>
+				<a hidden="true" id="tsa3">然后使用手机自带浏览器打开</a>
+        <font color="#FF6666" size="2px" id="serverstate" name="serverstate">服务器当前状态:<br>获取中...</font>
+        <font color="#FF0000"><br>PSD文件不能大于300M!<br>显式打标禁止打R模板！</font>
+        <font><a href="FAQ.html" target="_Blank">❓问题与解答</a> · <a target="_Blank" href="Check.html">🔍模板权限查询</a></font>
+				<br>
+				<font><a href="DataSet.html">🔧打标设置</a> · <a href="black_white.html">🔧黑/白名单</a></font>
+        <br>
+        <font><a href="HistoryStatsList.html">📚模板统计</a> · <a href="HistoryList.html">📜打标记录</a></font>
+        <br>
+        <font><a href="passwd.html">🔐修改密码</a> · <a href="LoginCore.html">🔒退出账号</a></font>
+				<!--临时文件-->
+        <input type="file" name="FileToXS" id="FileToXS" style="display: none">
+        <input type="file" name="FileToYS" id="FileToYS" style="display: none">
+				<!--临时文件-END-->
+				</div>
+			</div>
+		</div>
+		
+		<div class="card border-0 shadow card--register" id="register">
+			<div class="card-body">
+				<h2 class="card-title">显式打标</h2>
+					<button class="btn btn-lg" id="XS_File_Upload_Button">点我选择PSD文件</button>
+          <br>
+					<div class="form-group">
+						<input class="form-control" type="text" id="ToXSFileName" readonly="readonly" placeholder="文件名称(自动生成)">
+					</div>
+          <div class="form-group">
+            <font id="XS_1" name="XS_1" color="red">[✘] 未选择文件</font><br><!--文件是否选择-->
+            <font id="XS_2" name="XS_2" color="#FFCC66">[+] 等待文件选择..</font><br><!--文件是否为PSD-->
+            <font id="XS_3" name="XS_3" color="#FFCC66">[+] 等待文件选择..</font><br><!--文件大小是否正常-->
+            <font id="XS_4" name="XS_4" color="#FFCC66">[+] 等待文件选择..</font><!--判断是否带关键字-->
+          </div>
+					<div class="form-group">
+						<textarea class="form-control" cols="20" rows="6" type="text" id="XSQQ" autocomplete="off" placeholder="请输入买商人QQ
+(每一行一个QQ)
+务必注意换行!
+" required/=""></textarea>
+					</div>
+					<button class="btn btn-lg" id="XS_File_Upload_Submit">点击这里开始处理</button>
+					<br>
+					<div class="form-group">
+            <textarea class="form-control" cols="20" rows="1" type="text" id="ToXSFileS" autocomplete="off" readonly="readonly" placeholder="上传进度(自动生成)" required/=""></textarea>
+					</div>
+          <a href="javascript:void(0);" name="JXDB_XS" id="JXDB_XS" style="display: none">我愿意自行承担风险且继续打标<br>(!高危操作 真心不建议!)</a>
+			</div>
+			<button class="btn btn-back js-btn" data-target="welcome"><p><</p></button>
+		</div>
+		
+		<div class="card border-0 shadow card--login" id="login">
+			<div class="card-body">
+				<h2 class="card-title">隐式打标</h2><p class="card-text"><font color="#FF0000">隐式没有云存储！<br>需要等待下载手动发货！</font></p>
+					<button class="btn btn-lg" id="YS_File_Upload_Button">点我选择PSD文件</button>
+					<br>
+					<div class="form-group">
+						<input class="form-control" type="text" id="ToYSFileName" readonly="readonly" placeholder="文件名称(自动生成)">
+					</div>
+					<div class="form-group">
+						<font id="YS_1" name="YS_1" color="red">[✘] 未选择文件</font><br><!--文件是否选择-->
+            <font id="YS_2" name="YS_2" color="#FFCC66">[+] 等待文件选择..</font><br><!--文件是否为PSD-->
+            <font id="YS_3" name="YS_3" color="#FFCC66">[+] 等待文件选择..</font><br><!--文件大小是否正常-->
+            <font id="YS_4" name="YS_4" color="#FFCC66">[+] 等待文件选择..</font><!--判断是否带关键字-->
+					</div>
+					<div class="form-group">
+						<textarea class="form-control" cols="20" rows="6" type="text" id="YSQQ" autocomplete="off" placeholder="请输入买商人QQ
+(每一行一个QQ)
+务必注意换行!
+【【【敬告】】】
+文件大小M*QQ数
+不要大于300M" required/=""></textarea>
+					</div>
+					<button class="btn btn-lg" id="YS_File_Upload_Submit">点击这里开始处理</button>
+					<br>
+					<div class="form-group">
+            <textarea class="form-control" cols="20" rows="1" type="text" id="ToYSFileS" autocomplete="off" readonly="readonly" placeholder="上传进度(自动生成)" required/=""></textarea>
+					</div>
+          <a href="javascript:void(0);" name="JXDB_YS" id="JXDB_YS" style="display: none">我愿意自行承担风险且继续打标<br>(!高危操作 真心不建议!)</a>
+			</div>
+			<button class="btn btn-back js-btn" data-target="welcome"><p><</p></button>
+		</div>
+		
+	</div>
+	
+</div>
+  
+<script src="static/js/index.js"></script>
+<script src="static/js/jquery-3.6.0.js"></script>
+
+<script type="text/javascript">
+//刷新服务器状态
+GetPROGRESS();
+function GetPROGRESS() {
+  var obj = new XMLHttpRequest(); 
+  obj.onreadystatechange = function() { 
+    if (obj.status == 200 && obj.readyState == 4) { 
+      if(obj.responseText != ""){
+        	document.getElementById('serverstate').innerHTML = obj.responseText;
+      } else {
+        	document.getElementById('serverstate').innerHTML = "服务器当前状态:<br>获取失败...";
+      }
+    } else {
+        	document.getElementById('serverstate').innerHTML = "服务器当前状态:<br>获取失败...";
+    }
+  }
+  // 通过FormData收集零散的文件上传信息 
+  var fd = new FormData(); 
+  fd.append('ref', "serverstats");
+  obj.open("post", "ref_serverstate.php"); 
+  obj.send(fd);
+}
+</script>
+
+<script type="text/javascript">
+  //上传文件处理
+  var fileUpdate_button_XS = document.getElementById("XS_File_Upload_Button");
+  var fileUpdate_button_YS = document.getElementById("YS_File_Upload_Button");
+  var fileUpdate_input_XS = document.getElementById("FileToXS");
+  var fileUpdate_input_YS = document.getElementById("FileToYS");
+	
+	var submitfile_XS_Button = document.getElementById("XS_File_Upload_Submit");//提交按钮
+	var submitfile_YS_Button = document.getElementById("YS_File_Upload_Submit");
+  var submitfile_XS_Button_GaoWei = document.getElementById("JXDB_XS");//提交按钮
+  var submitfile_YS_Button_GaoWei = document.getElementById("JXDB_YS");
+  
+	
+	var S_XS = document.getElementById("ToXSFileS");//上传进度
+	var S_YS = document.getElementById("ToYSFileS");
+
+
+  var WSFX = false;//点击了无视风险按钮
+	
+  fileUpdate_button_XS.onclick = function () {
+    fileUpdate_input_XS.click();
+  }
+	fileUpdate_button_YS.onclick = function () {
+    fileUpdate_input_YS.click();
+  }
+
+  submitfile_XS_Button_GaoWei.onclick = submitfile_YS_Button_GaoWei.onclick = function () {
+    if(S_XS.value.indexOf("云黑") != -1 || S_YS.value.indexOf("云黑") != -1){
+      alert("老师你在..想什么呢?拜托老师清醒一点哇!!(摇晃)");
+      return;
+    }else if(S_XS.value.indexOf("高风险") != -1 || S_YS.value.indexOf("高风险") != -1){
+      alert("老师你在..想什么呢?拜托老师清醒一点哇!!(摇晃)");
+      return;
+    }else if(S_XS.value.indexOf("黑名单") != -1 || S_YS.value.indexOf("黑名单") != -1){
+      alert("老师你在..想什么呢?拜托老师清醒一点哇!!(摇晃)");
+      return;
+    }
+    alert("请珍重每一个模板,尊重每一个画师的付出!");
+    alert("每一个真正的商用老师都不希望模板流出,请谨记!");
+    WSFX = true;
+    document.getElementById("JXDB_XS").style.display = "none";
+    document.getElementById("JXDB_YS").style.display = "none";
+    S_XS.value = "已忽略风险,点击上传";
+    S_YS.value = "已忽略风险,点击上传";
+    S_XS.rows = 1;//缩小尺寸
+    S_YS.rows = 1;//缩小尺寸
+  }
+	
+  fileUpdate_input_XS.onchange = function () {
+    var TFN = document.getElementById("ToXSFileName");
+    var XYS1=document.getElementById("XS_1");
+    var XYS2=document.getElementById("XS_2");
+    var XYS3=document.getElementById("XS_3");
+    var XYS4=document.getElementById("XS_4");
+
+		var file = fileUpdate_input_XS.files[0];
+		if(file == null){//防止文件异常
+      TFN.value = "";
+      XYS1.innerHTML = "[✘] 未选择文件";
+      XYS1.color = "red";
+      XYS2.innerHTML = "[✘] 文件类型为未知";
+      XYS2.color = "red";
+      XYS3.innerHTML = "[✘] 文件大小未知";
+      XYS3.color = "red";
+      XYS4.innerHTML = "[✘] 文件名异常";
+      XYS4.color = "red";
+      return;
+    }else{
+      XYS1.innerHTML = "[√] 已选择文件";
+      XYS1.color = "#33CC66";
+    }
+		//获取文件名称
+		var fileName = file.name.replace( /.psd/gi , '');
+    fileName = fileName.replace(/\./gi, '点');
+    if(file.name.toLowerCase().indexOf(".psd") != -1){
+      TFN.value = fileName;
+      XYS2.innerHTML = "[√] 文件类型为PSD";
+      XYS2.color = "#33CC66";
+    }else{
+      XYS2.innerHTML = "[✘] 文件类型必须为PSD";
+      XYS2.color = "red";
+    }
+
+    //判断文件名
+    var Name_F_1 = false;
+    var Name_F_2 = false;
+    var Name_F_3 = false;
+    var Name_F_4 = false;
+    if(fileName.indexOf("牌") != -1){
+      Name_F_1 = true;
+    }
+    if(fileName.indexOf("【") != -1 && fileName.indexOf("】") != -1){
+      Name_F_2 = true;
+    }
+    if(fileName.indexOf("[") != -1 && fileName.indexOf("]") != -1){
+      Name_F_3 = true;
+    }
+    if(fileName.indexOf("(") != -1 && fileName.indexOf(")") != -1){
+      Name_F_4 = true;
+    }
+
+    if(Name_F_1){
+      XYS4.innerHTML = "[√] 文件名判断正常";
+      XYS4.color = "#33CC66";
+    }else if(Name_F_2 || Name_F_3 || Name_F_4){
+      XYS4.innerHTML = "[+] 建议以xx牌xxx命名文件";
+      XYS4.color = "#FFCC33";
+    }else{
+      XYS4.innerHTML = "[✘] 请以xx牌xxx重命名文件";
+      XYS4.color = "red";
+    }
+    if(fileName.replace(/[^x00-xff]/g,"0").length <=2){
+      XYS4.innerHTML = "[✘] 文件名过短";
+      XYS4.color = "red";
+    }
+    //判断异常文件名
+    if(fileName.toLowerCase().indexOf("trashed") != -1){
+      XYS4.innerHTML = "[✘] .trashed为已删除或回收站的文件.";
+      XYS4.color = "red";
+    }
+		
+		
+		//获取文件大小(字节Byte)
+		var fileSize= file.size/1024/1024;
+    if(fileSize>=300){
+      XYS3.innerHTML = "[✘] 文件大于300M";
+      XYS3.color = "red";
+    }else if(file.size<=10*1024){
+      XYS3.innerHTML = "[✘] 文件小于10KB";
+      XYS3.color = "red";
+    }else{
+      var Fz= fileSize.toFixed(2)+"M";
+      XYS3.innerHTML = "[√] 文件大小: " + Fz;
+      XYS3.color = "#33CC66";
+    }
+  }
+	
+	fileUpdate_input_YS.onchange = function () {
+    var TFN = document.getElementById("ToYSFileName");
+    var XYS1=document.getElementById("YS_1");
+    var XYS2=document.getElementById("YS_2");
+    var XYS3=document.getElementById("YS_3");
+    var XYS4=document.getElementById("YS_4");
+
+		var file = fileUpdate_input_YS.files[0];
+		if(file == null){//防止文件异常
+      TFN.value = "";
+      XYS1.innerHTML = "[✘] 未选择文件";
+      XYS1.color = "red";
+      XYS2.innerHTML = "[✘] 文件类型为未知";
+      XYS2.color = "red";
+      XYS3.innerHTML = "[✘] 文件大小未知";
+      XYS3.color = "red";
+      XYS4.innerHTML = "[✘] 文件名异常";
+      XYS4.color = "red";
+      return;
+    }else{
+      XYS1.innerHTML = "[√] 已选择文件";
+      XYS1.color = "#33CC66";
+    }
+    //获取文件名称
+    var fileName = file.name.replace( /.psd/gi , '');
+    fileName = fileName.replace(/\./gi, '点');
+    if(file.name.toLowerCase().indexOf(".psd") != -1){
+      TFN.value = fileName;
+      XYS2.innerHTML = "[√] 文件类型为PSD";
+      XYS2.color = "#33CC66";
+    }else{
+      XYS2.innerHTML = "[✘] 文件类型必须为PSD";
+      XYS2.color = "red";
+    }
+
+    //判断文件名
+    var Name_F_1 = false;
+    var Name_F_2 = false;
+    var Name_F_3 = false;
+    var Name_F_4 = false;
+    if(fileName.indexOf("牌") != -1){
+      Name_F_1 = true;
+    }
+    if(fileName.indexOf("【") != -1 && fileName.indexOf("】") != -1){
+      Name_F_2 = true;
+    }
+    if(fileName.indexOf("[") != -1 && fileName.indexOf("]") != -1){
+      Name_F_3 = true;
+    }
+    if(fileName.indexOf("(") != -1 && fileName.indexOf(")") != -1){
+      Name_F_4 = true;
+    }
+
+    if(Name_F_1){
+      XYS4.innerHTML = "[√] 文件名判断正常";
+      XYS4.color = "#33CC66";
+    }else if(Name_F_2 || Name_F_3 || Name_F_4){
+      XYS4.innerHTML = "[+] 建议以xx牌xxx命名文件";
+      XYS4.color = "#FFCC33";
+    }else{
+      XYS4.innerHTML = "[✘] 请以xx牌xxx重命名文件";
+      XYS4.color = "red";
+    }
+    if(fileName.replace(/[^x00-xff]/g,"0").length <=3){
+      XYS4.innerHTML = "[✘] 文件名过短";
+      XYS4.color = "red";
+    }
+    //判断异常文件名
+    if(fileName.toLowerCase().indexOf("trashed") != -1){
+      XYS4.innerHTML = "[✘] .trashed为已删除或回收站的文件.";
+      XYS4.color = "red";
+    }
+    
+    
+    //获取文件大小(字节Byte)
+    var fileSize= file.size/1024/1024;
+    if(fileSize>=300){
+      XYS3.innerHTML = "[✘] 文件大于300M";
+      XYS3.color = "red";
+    }else{
+      var Fz= fileSize.toFixed(2)+"M";
+      XYS3.innerHTML = "[√] 文件大小: " + Fz;
+      XYS3.color = "#33CC66";
+    }
+  }
+	
+	//显式
+  var alreadyStart = 0;//已点击上传
+	submitfile_XS_Button.onclick = function () {
+
+    if(alreadyStart == 1){
+      return;
+    }
+    S_XS.value = "检查中...请等待...";
+
+    if(document.getElementById("ToXSFileName").value.indexOf("_md5_") != -1){
+        S_XS.value = "文件名不能包含md5！";
+	    	return;
+		}
+    if(document.getElementById("ToXSFileName").value == "" || document.getElementById("XSQQ").value == ""){
+	    	S_XS.value = "必填项为空,请检查！";
+	    	return;
+	  }
+
+    var XYS1=document.getElementById("XS_1");
+    var XYS2=document.getElementById("XS_2");
+    var XYS3=document.getElementById("XS_3");
+    var XYS4=document.getElementById("XS_4");
+    if(XYS1.innerHTML.indexOf("✘") != -1 || XYS2.innerHTML.indexOf("✘") != -1 || XYS3.innerHTML.indexOf("✘") != -1 || XYS4.innerHTML.indexOf("✘") != -1){
+        S_XS.value = "请检查项目需求！";
+        return;
+    }
+
+	  var DBQQ = document.getElementById("XSQQ").value.replace(/\r\n/g,"");
+	  DBQQ = DBQQ.replace(/\r/g,"");
+    DBQQ = DBQQ.replace(/\n/g,"");
+    DBQQ = DBQQ.replace(/\s/g,"");
+	  DBQQ = DBQQ.replace(/
+/g,"");
+	  DBQQ = DBQQ.replace(/
+/g,"");
+    DBQQ = DBQQ.replace(/<br>/g,"");
+	  if(isNaN(DBQQ)){//非纯数字
+        S_XS.value = "QQ必须纯数字,请检查！";
+	    	return;
+	  }
+
+    UpLoadQQ = document.getElementById("XSQQ").value;//上传的QQ
+    UpLoadQQ = UpLoadQQ.replace(/\r\n/g,"|");
+    UpLoadQQ = UpLoadQQ.replace(/\r/g,"|");
+    UpLoadQQ = UpLoadQQ.replace(/\n/g,"|");
+    UpLoadQQ = UpLoadQQ.replace(/\s/g,"");//空格
+    UpLoadQQ = UpLoadQQ.replace(/
+/g,"|");
+    UpLoadQQ = UpLoadQQ.replace(/
+/g,"|");
+    UpLoadQQ = UpLoadQQ.replace(/<br>/g,"|");
+
+    //分割
+    var QQarr = UpLoadQQ.split('|');
+
+    //删除空行
+    for(var i=0;i<QQarr.length;i++){
+      if(QQarr[i] == ""){
+        QQarr.splice(i,1);
+      }
+    }
+    UpLoadQQ = "";
+    for(var i=0;i<QQarr.length;i++){
+      if(QQarr[i] != ""){
+        if(UpLoadQQ == ""){
+          UpLoadQQ = QQarr[i];
+        }else{
+          UpLoadQQ = UpLoadQQ + "|"+QQarr[i];
+        }
+      }
+    }
+    //↑
+
+    //打标qq重复提示
+    var RepeqtQQ = arrRepeat(QQarr);
+    if(RepeqtQQ != ""){
+    	S_XS.value = "QQ"+RepeqtQQ+"重复!";
+      return;
+    }
+
+    //安全防护
+    var obj = new XMLHttpRequest(); 
+    obj.onreadystatechange = function() { 
+      if (obj.status == 200 && obj.readyState == 4) { 
+        if(obj.responseText == "SUCCESS" || WSFX == true){
+                    //次数溢出提醒
+          if("true" == "true"){
+            var DaBiaoCount = UpLoadQQ.split('|').length;
+            if(DaBiaoCount > 45){
+              S_XS.value = "剩余打标次数不足";
+              return;
+            }
+          }
+          alreadyStart = 1;
+          S_XS.value = "上传中...请等待...";
+
+          document.getElementById("ToXSFileName").value = document.getElementById("ToXSFileName").value +"_md5_"+ "9318d0";
+
+          var name = document.getElementById("ToXSFileName").value;
+          var reg = /[\u4e00-\u9fa5_a-z_A-Z_0-9_.@#$^*()=+。！？『』〖〗［］《》〔〕{}「」【】\[\]-]/g;
+          var names = name.match(reg);
+          name = names.join("");
+          document.getElementById("ToXSFileName").value = name;
+          XY = "XS";
+          ReV();
+          RoTime();
+        }else{
+          S_XS.value = obj.responseText;
+          if(S_XS.value.split("\n").length>=S_XS.value.split("\r").length){
+            S_XS.rows = S_XS.value.split("\n").length;
+          }else if(S_XS.value.split("\r").length>=S_XS.value.split("\n").length){
+            S_XS.rows = S_XS.value.split("\r").length;
+          }
+          if(S_XS.rows > 5){
+            S_XS.rows = 5;
+          }
+          document.getElementById("JXDB_XS").style.display = "block";
+        }
+      } 
+    }
+    // 通过FormData收集零散的文件上传信息 
+    var fd = new FormData(); 
+    fd.append('GQ', UpLoadQQ);
+    fd.append('SXX',"<REG_>true<_REG><TEL_>true<_TEL><WECHAT_>false<_WECHAT><ZFBNAME_>false<_ZFBNAME><SMRZ_>false<_SMRZ><NoCheckZFX_>false<_NoCheckZFX><NoCheckBL_>false<_NoCheckBL><LimitNL_>16<_LimitNL><LimitHY_>100<_LimitHY><LimitSCHY_>30<_LimitSCHY><LimitDBS_>2<_LimitDBS><LimitGroupNum_>1<_LimitGroupNum>");
+    obj.open("post", "./function/SafeCheck/Ajax_CheckFK.php"); 
+    obj.send(fd);
+  }
+	
+	
+	//隐式
+	submitfile_YS_Button.onclick = function () {
+    
+    if(alreadyStart == 1){
+      return;
+    }
+    S_YS.value = "检查中...请等待...";
+
+		if(document.getElementById("ToYSFileName").value.indexOf("_md5_") != -1){
+        S_YS.value = "文件名不能包含md5！";
+	    	return;
+		}
+    if( document.getElementById("ToYSFileName").value == "" || document.getElementById("YSQQ").value == ""){
+	    	S_YS.value = "必填项为空,请检查！";
+	    	return;
+	  }
+
+    var XYS1=document.getElementById("YS_1");
+    var XYS2=document.getElementById("YS_2");
+    var XYS3=document.getElementById("YS_3");
+    var XYS4=document.getElementById("YS_4");
+    if(XYS1.innerHTML.indexOf("✘") != -1 || XYS2.innerHTML.indexOf("✘") != -1 || XYS3.innerHTML.indexOf("✘") != -1 || XYS4.innerHTML.indexOf("✘") != -1){
+        S_XS.value = "请检查必要需求！";
+        return;
+    }
+
+    var DBQQ = document.getElementById("YSQQ").value.replace(/\r\n/g,"");
+    DBQQ = DBQQ.replace(/\r/g,"");
+    DBQQ = DBQQ.replace(/\n/g,"");
+    DBQQ = DBQQ.replace(/\s/g,"");
+	  DBQQ = DBQQ.replace(/
+/g,"");
+	  DBQQ = DBQQ.replace(/
+/g,"");
+	  DBQQ = DBQQ.replace(/<br>/g,"");
+	  if(isNaN(DBQQ)){//非纯数字
+        S_YS.value = "QQ必须纯数字,请检查！";
+	    	return;
+	  }
+
+	    UpLoadQQ = document.getElementById("YSQQ").value;//上传的QQ
+      UpLoadQQ = UpLoadQQ.replace(/\r\n/g,"|");
+      UpLoadQQ = UpLoadQQ.replace(/\r/g,"|");
+      UpLoadQQ = UpLoadQQ.replace(/\n/g,"|");
+      UpLoadQQ = UpLoadQQ.replace(/\s/g,"");//空格
+      UpLoadQQ = UpLoadQQ.replace(/
+/g,"|");
+      UpLoadQQ = UpLoadQQ.replace(/
+/g,"|");
+    UpLoadQQ = UpLoadQQ.replace(/<br>/g,"|");
+
+
+      //分割
+      var QQarr = UpLoadQQ.split('|');
+
+      //删除空行
+      for(var i=0;i<QQarr.length;i++){
+        if(QQarr[i] == ""){
+          QQarr.splice(i,1);
+        }
+      }
+      UpLoadQQ = "";
+      for(var i=0;i<QQarr.length;i++){
+        if(QQarr[i] != ""){
+          if(UpLoadQQ == ""){
+            UpLoadQQ = QQarr[i];
+          }else{
+            UpLoadQQ = UpLoadQQ + "|"+QQarr[i];
+          }
+        }
+      }
+      //↑
+
+      //打标qq重复提示
+      var RepeqtQQ = arrRepeat(QQarr);
+      if(RepeqtQQ != ""){
+        S_YS.value = "QQ"+RepeqtQQ+"重复!";
+        return;
+      }
+
+      //打标人数过多提示
+      if(QQarr.length * parseInt(document.getElementById("YS_3").innerHTML.replace("[√] 文件大小: ","").replace("M","")) > 300){
+        S_YS.value = "QQ*文件 超过300M!";
+        return;
+      }
+
+      //安全防护
+      var obj = new XMLHttpRequest(); 
+      obj.onreadystatechange = function() { 
+        if (obj.status == 200 && obj.readyState == 4) { 
+          if(obj.responseText == "SUCCESS" || WSFX == true){
+                          //次数溢出提醒
+              if("true" == "true"){
+                var DaBiaoCount = UpLoadQQ.split('|').length;
+                if(DaBiaoCount > 45){
+                  S_YS.value = "剩余打标次数不足";
+                  return;
+                }
+              }
+              alreadyStart = 1;
+              S_YS.value = "上传中...请等待...";
+        
+              document.getElementById("ToYSFileName").value = document.getElementById("ToYSFileName").value +"_md5_"+ "c0447f";
+        
+              var name = document.getElementById("ToYSFileName").value;
+              var reg = /[\u4e00-\u9fa5_a-z_A-Z_0-9_.@#$^*()=+。！？『』〖〗［］《》〔〕{}「」【】\[\]-]/g;
+              var names = name.match(reg);
+              name = names.join("");
+              document.getElementById("ToYSFileName").value = name;
+              XY = "YS";
+              ReV();
+              RoTime();
+          }else{
+            S_YS.value = obj.responseText;
+            if(S_YS.value.split("\n").length>=S_YS.value.split("\r").length){
+              S_YS.rows = S_YS.value.split("\n").length;
+            }else if(S_YS.value.split("\r").length>=S_YS.value.split("\n").length){
+              S_YS.rows = S_YS.value.split("\r").length;
+            }
+            if(S_YS.rows > 5){
+              S_YS.rows = 5;
+            }
+            document.getElementById("JXDB_YS").style.display = "block";
+          }
+        } 
+      }
+      // 通过FormData收集零散的文件上传信息 
+      var fd = new FormData(); 
+      fd.append('GQ', UpLoadQQ);
+      fd.append('SXX',"<REG_>true<_REG><TEL_>true<_TEL><WECHAT_>false<_WECHAT><ZFBNAME_>false<_ZFBNAME><SMRZ_>false<_SMRZ><NoCheckZFX_>false<_NoCheckZFX><NoCheckBL_>false<_NoCheckBL><LimitNL_>16<_LimitNL><LimitHY_>100<_LimitHY><LimitSCHY_>30<_LimitSCHY><LimitDBS_>2<_LimitDBS><LimitGroupNum_>1<_LimitGroupNum>");
+      obj.open("post", "./function/SafeCheck/Ajax_CheckFK.php"); 
+      obj.send(fd);
+    }
+
+var UpLoadQQ = "";//上传qq
+var XY = "";//显隐
+var fm = new Blob();//整个文件
+var fmSize = 0;//文件大小
+var needuploadcount = 0;//上传需求次数
+var uploadcount = 0;//已上传次数
+var CutStart = 0;//起始分割位置
+var CutEnd = 0;//终止分割位置
+var CutSize = 1024 * 1024 * 30;//一次截取的大小(字节) 
+var isUploadPartSuccess = true;//块上传成功
+var isUploadSuccess = false;//整体上传成功
+function ReV(){//初始化变量
+  if(XY == "XS"){
+    fm = fileUpdate_input_XS.files[0];//取得文件
+  }else{
+    fm = fileUpdate_input_YS.files[0];//取得文件
+  }
+  fmSize = fm.size;//取得大小
+  needuploadcount = Math.trunc(fmSize/CutSize)+2;//M的块分割次数
+}
+
+function RoTime(){//一直循环
+    if(isUploadPartSuccess == true){
+      uploadcount = uploadcount+1;
+      if(uploadcount == needuploadcount){
+        isUploadSuccess = true;
+        var obj2 = new XMLHttpRequest(); 
+        var fd = new FormData(); 
+        fd.append('File'+ XY, "");
+        fd.append('QQ', UpLoadQQ);
+        fd.append('FileName', document.getElementById("To"+ XY +"FileName").value);
+        fd.append('UploadSuccess', "true");
+        obj2.open("post", "upload_file_"+ XY +".php"); 
+        obj2.send(fd);
+        setTimeout("TZ()",2000);
+        return;
+      }
+      CutStart = CutEnd;//首=尾
+      if(CutEnd <= fmSize){//判断尾巴
+        CutEnd = CutStart + CutSize;//尾=首+CutSize
+      }else{
+        CutEnd = fmSize;
+      }
+      isUploadPartSuccess = false;
+      
+      var obj = new XMLHttpRequest(); 
+      obj.onreadystatechange = function() { 
+        if (obj.status == 200 && obj.readyState == 4) {
+          //document.getElementById('con').innerHTML = obj.responseText; 
+        } 
+      } 
+      // 通过Ajax对象的upload属性的onprogress事件感知当前文件上传状态 
+      obj.upload.onprogress = function(evt) { 
+        // 当上传文件时显示进度条 
+        if(XY == "XS"){
+          S_XS.value = "(" + uploadcount + "/" + needuploadcount + ")" + Math.floor((evt.loaded / evt.total) * 100) + "%"; 
+        }else{
+          S_YS.value = "(" + uploadcount + "/" + needuploadcount + ")" + Math.floor((evt.loaded / evt.total) * 100) + "%"; 
+        }
+        if(Math.floor((evt.loaded / evt.total) * 100) == 100){
+          setTimeout("FileUploadCheck()",2000);
+          if(XY == "XS"){
+            S_XS.value = "正在校验..请稍候...";
+          }else{
+            S_YS.value = "正在校验..请稍候...";
+          }
+        }
+      }
+      // 通过FormData收集零散的文件上传信息
+      var tmpfile = fm.slice(CutStart, CutEnd); 
+      var fd = new FormData(); 
+      fd.append('File'+XY, tmpfile);
+      fd.append('QQ', UpLoadQQ);
+      fd.append('FileName', document.getElementById("To"+XY+"FileName").value);
+      fd.append('UploadSuccess', "false");
+      obj.open("post", "upload_file_"+XY+".php"); 
+      obj.send(fd);
+    }
+  setTimeout("RoTime()",2000);  
+}
+function TZ(){
+  var downloadURLF = encodeURIComponent(document.getElementById("To"+XY+"FileName").value);
+  var indexRight = downloadURLF.indexOf("_md5_");
+  var FN = downloadURLF.substr(0, indexRight);
+  var SYT = UpLoadQQ;
+  window.location.href = 'TiaoZhuan/?DownloadURLF='+downloadURLF+'.zip'+'&FileName='+FN+'&XY='+XY+'&SYT='+SYT;
+  return;
+}
+var JiaoYan = 0;
+function FileUploadCheck(){
+  JiaoYan = JiaoYan+1;
+  if(XY == "XS"){
+    if(JiaoYan >= 50){
+      S_XS.value = "["+JiaoYan+"]请刷新重试...";
+    }else{
+      S_XS.value = "["+JiaoYan+"]正在校验...";
+    }
+  }else{
+    if(JiaoYan >= 50){
+      S_YS.value = "["+JiaoYan+"]请刷新重试...";
+    }else{
+      S_YS.value = "["+JiaoYan+"]正在校验...";
+    }
+  }
+  //Ajax
+  var FP = "Upload/"+document.getElementById("To"+XY+"FileName").value+".havepart"+uploadcount; //文件名
+  var FP2 = "uploadPSDFolder/"+XY+"/"+document.getElementById("To"+XY+"FileName").value+".part"+uploadcount; //文件名
+  $.post("filecheck.php", { FilePath: FP, FilePath2: FP2, requesttype: "post" },
+   function(data){
+     if(data=='T'){
+      isUploadPartSuccess = true;
+      JiaoYan = 0;
+      return;
+    }else{
+      setTimeout("FileUploadCheck()",1000);
+      return;
+    }
+  }); 
+}
+</script>
+
+<script type="text/javascript">
+	//UA判断
+  var ua = navigator.userAgent;
+  if(ua.indexOf("MQQBrowser") > -1 && ua.indexOf("QQTheme") > -1){
+    //qq/qq内置浏览器
+    document.getElementById("ptp").innerHTML = "请勿在QQ内使用";
+    document.getElementById("ptm").innerHTML = "请使用自带浏览器";
+    document.getElementById("tsa1").hidden = false;
+    document.getElementById("tsa2").hidden = false;
+    document.getElementById("tsa3").hidden = false;
+  } else if (ua.indexOf("MicroMessenger") > -1) {
+    //微信浏览器
+    document.getElementById("ptp").innerHTML = "请勿在微信内使用";
+    document.getElementById("ptm").innerHTML = "请使用自带浏览器";
+    document.getElementById("tsa1").hidden = false;
+    document.getElementById("tsa2").hidden = false;
+    document.getElementById("tsa3").hidden = false;
+  }
+
+  function arrRepeat(arr){//检查重复问题
+    var arrStr = JSON.stringify(arr),str;
+    for (var i = 0; i < arr.length; i++) {
+      if (arrStr.indexOf(arr[i]) != arrStr.lastIndexOf(arr[i])){
+        return arr[i];
+      }
+    }
+    return "";
+  }
+
+  // 从一个线性表中删除给定的值
+  function deleteValue(array, delvalue)
+    {
+      for(var i = 0; i < array.length; i++){
+        if(array[i] == delvalue){
+            array.splice(i,1);
+        }
+      }
+      return array;
+    }
+</script>
+
+
+
+</body>
+</html>

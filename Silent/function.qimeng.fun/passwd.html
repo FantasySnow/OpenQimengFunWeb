@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>修改密码</title>
+  <meta name="keywords" content="趣绮梦">
+  <meta name="description" content="趣绮梦">
+  <link href="static/css/bootstrap.min1.css" rel="stylesheet">
+  <script src="static/js/jquery.min.js"></script>
+  <script src="static/js/bootstrap.min.js"></script>
+</head>
+<body>  <nav class="navbar navbar-fixed-top navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Modify Password</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Modify Password</a>
+      </div><!-- /.navbar-header -->
+      <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="Login.html"><span class="glyphicon glyphicon-user"></span>登陆页面</a>
+          </li>
+          <li><a href="LoginCore.html"><span class="glyphicon glyphicon-off"></span> 退出登陆</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav><!-- /.navbar -->
+  <div class="container" style="padding-top:70px;">
+    <div class="col-xs-12 col-sm-10 col-lg-8 center-block" style="float: none;">
+      <div class="panel panel-primary">
+        <div class="panel-heading"><h3 class="panel-title">修改密码</h3></div>
+        <div class="panel-body">
+          <form action="javascript:;" method="post" class="form-horizontal" role="form">
+            <div class="input-group">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+              <input type="password" name="oldpass" value="" class="form-control" placeholder="旧密码" required="required">
+            </div><br>
+            <div class="input-group">
+              <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+              <input type="password" name="newpass" class="form-control" placeholder="新密码" required="required">
+            </div><br>
+            <div class="form-group">
+              <div class="col-xs-12"><input type="submit" name="submit" value="修改" class="btn btn-primary form-control"></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div></body></html>

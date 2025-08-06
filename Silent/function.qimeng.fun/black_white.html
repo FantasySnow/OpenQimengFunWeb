@@ -1,0 +1,111 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>趣绮梦 - 趣标记 - Data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" charset="utf-8">
+    <link href="static/css/bootstrap.min-3.7.css" rel="stylesheet">
+
+    <!--图标样式-->
+    <link rel="stylesheet" href="static/css/normalize.min.css">
+    <!--主要样式-->
+    <link rel="stylesheet" href="static/css/checkbox.style.css">
+
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+
+    <script>
+
+    $(function () {
+        var viewport = document.querySelector('meta[name=viewport]');
+        var winHigh = $(window).height();
+        winHigh = winHigh/1;
+        $(".container").css("height",winHigh+"px");
+    });
+
+
+    function updateinfo() {
+        var HMD = $("#HMD").val();
+        var BMD = $("#BMD").val();
+
+        var data = {
+            HMD: HMD,
+            BMD: BMD
+        };
+
+        $.ajax({
+            url: "./BW_Core.php",
+            type: "POST",
+            data: data, // 将数据转换为 URL 参数格式
+            success: function(response) {
+                // 请求成功后的处理
+                if(response.indexOf("ALERT[") != -1){
+                    var al = substrstr(response,"ALERT[","]ALERT");
+                    alert(al);
+                }else{
+                    alert("更新完成!");
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // 请求失败后执行的函数
+                alert("请求失败!");
+            }
+        });
+    }
+
+    //取出中间文本
+    function substrstr(str,f,n){
+        return str.substring(str.indexOf(f) + f.length, str.indexOf(n));
+    }
+    </script>
+    
+    <style>
+        .container {
+            display: table;
+            height: 100%;
+        }
+        .row {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .row-centered {
+            text-align: center;
+        }
+        .col-centered {
+            display: inline-block;
+            float: none;
+            text-align: left;
+            margin-right: -4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row row-centered">
+            <div class="well col-md-6 col-centered">
+                <a href="index.html">←返回主页</a>
+                <center><font size="6px">首选项</font></center>
+                    <br>
+                    <span class="input-group-addon"><b>白名单</b></span>
+                    <span class="input-group-addon"><b>黑名单</b></span>
+                    <br>
+                    
+                    <div class="input-group input-group-md">
+                        <div style="display:flex;">
+                            <textarea class="form-control" id="BMD" cols="50" rows="15"></textarea>
+                            <textarea class="form-control" id="HMD" cols="50" rows="15"></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    * 每行一个QQ嗷呜~
+                    <br>
+                    * 请务必仔细确认嗷呜~ 更改后记得点提交~
+                    <button type="submit" class="btn btn-success btn-block" onclick="updateinfo();">更新</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
